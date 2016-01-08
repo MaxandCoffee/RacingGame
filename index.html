@@ -1,29 +1,196 @@
-// Check if the user is ready to play!
-confirm("I'm ready to play");
-var age = prompt("What's your age");
+<DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Racing Game</title>
+</head>
+    <style>
+        
+        body{
+            margin:0;
+            padding:0;
+            background-color: #888;
+        }
+        
+        #wrapper{
+            margin: 0 auto;
+            height: 800px;
+            width: 1000px;
+        }
+        
+        button{
+            height: 300px;
+            width: 800px;
+            border-radius: 18px;
+            font-size: 74px;
+            line-height: 300px;
+            text-align: center;
+            background-color: aqua;
+            margin-left: 100px;
+            cursor: pointer;
+            padding: 0;
+        }
+        
+        #startButton{
+            display:block;
+        }
+        
+        #go{
+            display: none;
+            background-color: limegreen;
+        }
+        
+        #restart{
+            display: none;
+        }
+        
+        #close{
+            display: none;
+        }
+        
+        #road{
+            display: none;
+            border-right: dashed 10px white;
+            height: 328px;
+            width: 1000px;
+            background-image: url("http://static.dreamstime.com/t/asphalt-road-texture-loop-15392154.jpg");
+            background-size: fill;
+            position: absolute;
+            left: 168px;
+            z-index: -1;
+        }
+        
+        .car{
+            position: relative;
+            -webkit-animation: mymove 10s; /* Chrome, Safari, Opera */
+            animation: mymove 8s;
+            animation-fill-mode: forwards;
+            z-index: +1;
+        }
+        
+        .car img{
+            heigth:100px;
+            width: 200px;
+        }
+        
+        .car1{
+            -webkit-animation-timing-function: ease;
+            animation-timing-function: ease;
+            margin-top: 20px;
+        }
+        
+        .car2{
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+            margin-top: 80px;
+        }
+        
+        /* Chrome, Safari, Opera */
+        @-webkit-keyframes mymove {
+            from {left: 0px;}
+            to {left: 800px;}
+        }
+        
+        @keyframes mymove {
+            from {left: 0px;}
+            to {left: 800px;}
+        }
+        
+        #cover{
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            display: none;
+            background: rgba(0, 0, 0, 0.7);
+            background-size: cover;
+            text-align: center;
+            z-index: +2;
+        }
+        
+        #cover p{
+            color: darkorange;
+            font-size: 80px;
+        }
+        
+        #cover >image{
+            height: auto;
+            width: auto;
+            padding: 50px;
+        }
+        
+        .smallButton{
+            height: 30px;
+            width: 100px;
+            font-size: 15px;
+            line-height: 30px;
+            margin: auto;
+        }
+      
+    </style>
+    <body>
+            <div id="wrapper">   
+                <button id="startButton" onclick="start()">Click to Play</button>
+                <button id="go" onclick="race()">GO!</button>
+                <button id="close" onclick="leave()">Hit the Road</button>
+                <button id="restart" onclick="reload()">Restart</button>
+                <div id="road">
+                    <div class="car car1"><img src="http://www.clker.com/cliparts/o/h/i/f/Y/K/red-car-top-view-hi.png"/></div>
+                    <div class="car car2"><img src="http://www.clker.com/cliparts/q/0/m/g/P/c/red-sports-car-top-view-hi.png"/></div> 
+                </div>
+            </div> 
+            <div id="cover">
+                <img src="https://storybookstorage.s3.amazonaws.com/items/images/000/130/115/original/V-icons-Vehicles-Red-Car-2_256x256-32.png?1441540163"/>
+                <p>See Ya Later!</p>
+                <button onclick="reload()" class="smallButton">Restart</button>
+            </div>
+    </body>
+    <script>
+    confirm("I'm ready to play");
+    var age = prompt("What's your age");
 
-if(age < 13){
-    console.log("You can play but I take no responsibility");
-}else{
-    console.log("Play on!");
-}
+    if(age < 13){
+        alert("You can play but I take no responsibility");
+    }else{
+        alert("Play on!");
+    }
+    
 
-console.log("You are at a Justin Bieber concert, and you hear this lyric 'Lace my shoes off, start racing.'");
-
-console.log("Suddenly, Bieber stops and says, 'Who wants to race me?'");
-
-var userAnswer = prompt("Do you want to race Bieber on stage?");
-
-if (userAnswer === "yes"){
-    console.log("You and Bieber start racing. It's neck and neck! You win by a shoelace!");
-}else{
-    console.log("Oh no! Bieber shakes his head and sings 'I set a pace, so I can race without pacing.'");
-}
-
-var feedback = prompt("Rate my game from 1(worst) - 10(best)");
-
-if (feedback > 8){
- console.log("Thank you! We should race at the next concert!");
-}else{
-    console.log("I'll keep practicing coding and racing.");
-}
+    function start(){
+    var userAnswer = prompt("Think you're fast? Think you can handle the streets of Game Town? My Name's Rex, and I dare you to race me! Do you wanna race?");
+    var button1 = document.getElementById("startButton")
+    var button2 = document.getElementById("go")
+    var button3 = document.getElementById("close")
+    var button4 = document.getElementById("restart")
+    
+        if(userAnswer === "yes"){
+            alert("Okay! Start your Engines and lets see who wins!!");
+            button1.style.display = 'none';
+            button2.style.display = 'block';
+        }else{
+            alert("Alright then, why don't you just get on out of Gametown!");
+            button1.style.display = 'none';
+            button3.style.display = 'block'
+            button4.style.display = 'block'
+        }
+    }
+        
+    function race(){
+        var race = document.getElementById("road")
+        race.style.display = 'block';
+        win();
+    }
+    
+    function win(){
+        setTimeout(function(){ alert("YOU WON!"); }, 9000);
+    } 
+        
+    function reload(){
+        location.reload();
+    }
+     
+    
+    function leave(){
+        document.getElementById("wrapper").style.display = 'none';
+        document.getElementById("cover").style.display = 'block';
+    }
+    </script>
+</html>
